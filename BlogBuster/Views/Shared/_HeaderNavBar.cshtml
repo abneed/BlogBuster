@@ -72,7 +72,7 @@
 </style>
 <ul class="navbar">
     @Html.ActionLink("BlogBuster", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-    <li class="navbar-button"><a href="#">Sign Up</a></li>
+    <li class="navbar-button">@Html.ActionLink("Sign Up", "Create", "User")</li>
     <li class="navbar-button"><a href="#">Log In</a></li>
     <li class="navbar-button dropdown">
         <a class="dropbtn" href="#">Account</a>
@@ -82,6 +82,6 @@
             <a href="#">Log Out</a>
         </div>
     </li>
-    <li class="navbar-button"><a href="#">Users</a></li>
+    <li class="navbar-button">@Html.ActionLink("Users", "Index", "User")</li>
     <li class="navbar-button">@Html.ActionLink("Home", "Index", "Home")</li>
 </ul>
