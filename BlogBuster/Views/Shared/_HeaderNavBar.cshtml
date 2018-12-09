@@ -1,0 +1,84 @@
+﻿<style>
+
+    .active{
+        background-color: dimgray;
+    }
+
+    .navbar-brand {
+        float: left;
+        margin: 12px;
+    }
+
+    .navbar {
+        list-style: none;
+        background-color: #333;
+        height: 46px;
+        margin: 0;
+        padding: 0;
+        position: sticky;
+        overflow: visible;
+    }
+
+    .navbar-button {
+        float: right;
+    }
+
+    .navbar-button a, .dropbtn {
+        display: inline-block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    .navbar-button a:hover {
+        background-color: orangered;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+        overflow: visible;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba( 0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #f1f1f1;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+</style>
+<ul class="navbar">
+    @Html.ActionLink("BlogBuster", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <li class="navbar-button"><a href="#">Sign Up</a></li>
+    <li class="navbar-button"><a href="#">Log In</a></li>
+    <li class="navbar-button dropdown">
+        <a class="dropbtn" href="#">Account</a>
+        <div class="dropdown-content">
+            <a href="#">Profile</a>
+            <a href="#">Settings</a>
+            <a href="#">Log Out</a>
+        </div>
+    </li>
+    <li class="navbar-button"><a href="#">Users</a></li>
+    <li class="navbar-button">@Html.ActionLink("Home", "Index", "Home")</li>
+</ul>

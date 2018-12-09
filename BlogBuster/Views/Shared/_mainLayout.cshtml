@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title | BlogBuster</title>
+    @*@Styles.Render("~/Content/css")*@
+    @*@Scripts.Render("~/bundles/modernizr")*@
+    <style>
+        body{
+            margin:0;
+        }
+    </style>
+</head>
+<body>
+    @{
+        Html.RenderPartial("_HeaderNavBar");
+    }
+    <div>
+        @RenderBody()
+    </div>
+    @{ 
+        Html.RenderPartial("_Footer");
+    }
+</body>
+</html>

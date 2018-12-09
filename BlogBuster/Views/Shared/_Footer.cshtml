@@ -1,0 +1,41 @@
+﻿<style>
+    footer {
+        margin-top: 45px;
+        margin-left: 15px;
+        margin-right: 15px;
+        padding-top: 5px;
+        border-top: 1px solid gray;
+        color: gray;
+    }
+
+    footer a {
+        color: gray;
+    }
+
+    footer a:hover {
+        color: cornflowerblue;
+    }
+
+    footer small {
+    float: left;
+    }
+
+    footer ul {
+    float: right;
+    list-style: none;
+    }
+
+    footer ul li {
+        float: left;
+        margin-left: 15px;
+    }
+</style>
+<footer>
+    <small>BlogBuster by Guillermo A. Rodríguez</small>
+    <nav>
+        <ul>
+            <li>@Html.ActionLink("About", "About", "Home")</li>
+            <li><a href="https://github.com/Abneed/BlogBuster">Source Code</a></li>
+        </ul>
+    </nav>
+</footer>
