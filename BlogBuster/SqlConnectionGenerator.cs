@@ -78,7 +78,6 @@ namespace BlogBuster
                 int i = 0;
                 foreach (var parameter in strParameters)
                     command.Parameters.AddWithValue(parameter, objValues[i++]);
-                command.ExecuteNonQuery();
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
                 adapter.Fill(dataTable);
                 conn.Close();
