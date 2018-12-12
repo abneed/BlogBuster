@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
@@ -11,13 +10,13 @@ namespace BlogBuster.Controllers
         // GET: User
         public ActionResult Index()
         {
-            return View();
+            return View(Models.User.All());
         }
 
         // GET: User/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(Models.User.Find(id));
         }
 
         // GET: User/Create
@@ -32,12 +31,23 @@ namespace BlogBuster.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                if (new Models.User(
+                    collection["Name"],
+                    collection["Email"],
+                    collection["Password"],
+                    collection["Gender"])
+                    .Save())
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    throw new Exception();
+                }
             }
             catch
             {
+                ViewBag.Message = "Error: Couldn't create the user.";
                 return View();
             }
         }
@@ -45,8 +55,9 @@ namespace BlogBuster.Controllers
         // GET: User/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(Models.User.Find(id));
         }
+
 
         // POST: User/Edit/5
         [HttpPost]
@@ -54,12 +65,24 @@ namespace BlogBuster.Controllers
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                if (new Models.User(
+                    int.Parse(collection["Id"]),
+                    collection["Name"],
+                    collection["Email"],
+                    collection["Password"],
+                    collection["Gender"])
+                    .Save())
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    throw new Exception();
+                }
             }
             catch
             {
+                ViewBag.Message = "Error: Couldn't update the user.";
                 return View();
             }
         }
@@ -67,23 +90,12 @@ namespace BlogBuster.Controllers
         // GET: User/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Models.User.Find(id).Delete();
+
+            ViewBag.Message = "User deleted";
+
+            return RedirectToAction("Index");
         }
 
-        // POST: User/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

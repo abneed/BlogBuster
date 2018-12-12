@@ -6,7 +6,9 @@
 }
 
 <h2>All users</h2>
-
+<p>
+    @ViewBag.Message
+</p>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -18,7 +20,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Email)
         </th>
-        
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
         <th></th>
     </tr>
 
@@ -28,30 +32,30 @@
     <tr>
         <td>No data</td>
         <td>No data</td>
-        @*<td>
-            @Html.ActionLink("Edit", "Edit") |
-            @Html.ActionLink("Details", "Details") |
-            @Html.ActionLink("Delete", "Delete")
-        </td>*@
+        <td>No data</td>
+        <td></td>
     </tr>
     }
     else
     {
         foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </td>
+    </tr>
         }
     }
 }
