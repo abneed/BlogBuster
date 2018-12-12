@@ -2,7 +2,7 @@
 using System.Data.SqlClient;
 
 
-namespace BlogBuster.Controllers
+namespace BlogBuster
 {
     public class SqlConnectionGenerator
     {
