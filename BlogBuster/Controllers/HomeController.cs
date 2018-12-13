@@ -10,8 +10,8 @@ namespace BlogBuster.Controllers
     {
         public ActionResult Index()
         {
-            //return View();
-            return View(Models.MicroPost.All());
+            return View();
+            //return View(Models.MicroPost.All());
         }
 
         public ActionResult About()
