@@ -1,11 +1,11 @@
 ﻿@model BlogBuster.Models.User
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "My profile";
     Layout = "~/Views/Shared/_mainLayout.cshtml";
 }
 
-<h2>Profile</h2>
+<h2>My profile</h2>
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -15,7 +15,7 @@
             </strong>
         </dt>
 
-        <dd>    
+        <dd>
             @Html.DisplayFor(model => model.Name)
         </dd>
 
@@ -38,7 +38,7 @@
         <dd>
             @Html.DisplayFor(model => model.Password)
         </dd>
-        
+
         <dt>
             <strong>
                 @Html.DisplayNameFor(model => model.Gender)
@@ -51,6 +51,20 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Update profile", "Edit", new { id = Model.Id }) 
-    @*@Html.ActionLink("Back to List", "Index")*@
+    @Html.ActionLink("Update profile", "Edit", new { id = Model.Id })
 </p>
+@{
+    if (Session["Type"].ToString() != "Administrator")
+    {
+        <p>
+            @Html.ActionLink("Delete profile", "Delete", new { id = Model.Id })
+        </p>
+    }
+    else
+    {
+        <p>
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    }
+}
+

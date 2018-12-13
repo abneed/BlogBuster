@@ -40,6 +40,7 @@
 
     .dropdown {
         position: relative;
+        float:right;
         display: inline-block;
         overflow: visible;
     }
@@ -77,14 +78,19 @@
         if (Session.Count > 0)
         {
             int id = int.Parse(Session["User_Id"].ToString());
-            <li class="navbar-button dropdown">
+            <li class="navbar-button dropdown" style="width:150px">
                 <a class="dropbtn" href="#">Account</a>
                 <div class="dropdown-content">
-                    @Html.ActionLink("Profile","Details", "User", new { Id = id} , null)
+                    @Html.ActionLink("Your profile", "Details", "User", new { Id = id }, null)
+                    @Html.ActionLink("Your MicroPost's", "Index", "MicroPost", new { Id = id }, null)
                     @Html.ActionLink("Settings", "Edit", "User", new { Id = id }, null)
                     @Html.ActionLink("Sign out", "Delete", "Session")
                 </div>
             </li>
+            if (Session["Type"].ToString() == "Administrator")
+            {
+                <li class="navbar-button">@Html.ActionLink("Users", "Index", "User")</li>
+            }
         }
         else
         {
@@ -92,6 +98,6 @@
             <li class="navbar-button">@Html.ActionLink("Sign in", "Create", "Session")</li>
         }
     }
-    @*<li class="navbar-button">@Html.ActionLink("Users", "Index", "User")</li>*@
+
     <li class="navbar-button">@Html.ActionLink("Home", "Index", "Home")</li>
 </ul>

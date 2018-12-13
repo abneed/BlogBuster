@@ -10,7 +10,11 @@ namespace BlogBuster.Controllers
         // GET: User
         public ActionResult Index()
         {
-            return View(Models.User.All());
+            if (Session.Count > 0)
+                if (Session["Type"].ToString() == "Administrator")    
+                    return View(Models.User.All());
+
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: User/Details/5
@@ -35,10 +39,19 @@ namespace BlogBuster.Controllers
                     collection["Name"],
                     collection["Email"].ToLower(),
                     collection["Password"],
-                    collection["Gender"])
+                    collection["Gender"],
+                    collection["Type"]
+                    )
                     .Save())
                 {
                     Session["User_Id"] = Models.User.FindBy(collection["Email"].ToLower(), collection["Password"]).Id;
+                    Session["Type"] = Models.User.FindBy(collection["Email"].ToLower(), collection["Password"]).Type;
+
+                    if (Session["Type"].ToString() == "Administrator")
+                        SqlConnectionGenerator.ConnectionType = ConnectionType.Admin;
+                    else
+                        SqlConnectionGenerator.ConnectionType = ConnectionType.Reader;
+
                     return RedirectToAction("Details", new { Id = int.Parse(Session["User_Id"].ToString()) });
                 }
                 else
@@ -92,7 +105,18 @@ namespace BlogBuster.Controllers
         public ActionResult Delete(int id)
         {
             Models.User.Find(id).Delete();
-
+            if (Session.Count > 0)
+            {
+                if (int.Parse(Session["User_Id"].ToString()) == id)
+                {
+                    Session.RemoveAll();
+                    Session.Clear();
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+            }
             ViewBag.Message = "User deleted";
 
             return RedirectToAction("Index", "Home");

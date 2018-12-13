@@ -13,7 +13,7 @@ namespace BlogBuster
         private static string _strPassword;
 
         // Default login
-        public static ConnectionType ConnectionType = ConnectionType.Admin;
+        public static ConnectionType ConnectionType = ConnectionType.Reader;
 
         public static SqlConnection GetConnection()
         {

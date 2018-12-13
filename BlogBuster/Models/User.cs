@@ -30,12 +30,19 @@ namespace BlogBuster.Models
         [StringLength(10)]
         public Gender Gender { get; set; }
 
+        [Required]
+        public Type Type { get; set; }
 
-        public User(string Name = null, string Email = null, string Password = null, string Gender = null)
+        public List<MicroPost> MicroPosts { get; }
+
+
+        public User(string Name = null, string Email = null, string Password = null, string Gender = null, string Type = null)
         {
             this.Name = Name;
             this.Email = Email;
             this.Password = Password;
+            this.MicroPosts = new List<MicroPost>();
+            this.GetMicroPosts();
 
             switch (Gender)
             {
@@ -49,14 +56,29 @@ namespace BlogBuster.Models
                     this.Gender = Models.Gender.Male;
                     break;
             }
+
+            switch (Type)
+            {
+                case "Administrator":
+                    this.Type = Models.Type.Administrator;
+                    break;
+                case "Normal":
+                    this.Type = Models.Type.Normal;
+                    break;
+                default:
+                    this.Type = Models.Type.Normal;
+                    break;
+            }
         }
 
-        public User(int Id, string Name = null, string Email = null, string Password = null, string Gender = null)
+        public User(int Id, string Name = null, string Email = null, string Password = null, string Gender = null, string Type = null)
         {
             this.Id = Id;
             this.Name = Name;
             this.Email = Email;
             this.Password = Password;
+            this.MicroPosts = new List<MicroPost>();
+            this.GetMicroPosts();
 
             switch (Gender)
             {
@@ -68,6 +90,19 @@ namespace BlogBuster.Models
                     break;
                 default:
                     this.Gender = Models.Gender.Male;
+                    break;
+            }
+
+            switch (Type)
+            {
+                case "Administrator":
+                    this.Type = Models.Type.Administrator;
+                    break;
+                case "Normal":
+                    this.Type = Models.Type.Normal;
+                    break;
+                default:
+                    this.Type = Models.Type.Normal;
                     break;
             }
         }
@@ -86,7 +121,8 @@ namespace BlogBuster.Models
                     dataTable.Rows[row][1].ToString(),
                     dataTable.Rows[row][2].ToString(),
                     dataTable.Rows[row][3].ToString(),
-                    dataTable.Rows[row][4].ToString()
+                    dataTable.Rows[row][4].ToString(),
+                    dataTable.Rows[row][5].ToString()
                 ));
             }
 
@@ -105,9 +141,12 @@ namespace BlogBuster.Models
                 dataTable.Rows[0][1].ToString(),
                 dataTable.Rows[0][2].ToString(),
                 dataTable.Rows[0][3].ToString(),
-                dataTable.Rows[0][4].ToString()
+                dataTable.Rows[0][4].ToString(),
+                dataTable.Rows[0][5].ToString()
                 );
         }
+
+
 
         public static User FindBy(string Email, string Password)
         {
@@ -121,8 +160,30 @@ namespace BlogBuster.Models
                 dataTable.Rows[0][1].ToString(),
                 dataTable.Rows[0][2].ToString(),
                 dataTable.Rows[0][3].ToString(),
-                dataTable.Rows[0][4].ToString()
+                dataTable.Rows[0][4].ToString(),
+                dataTable.Rows[0][5].ToString()
                 );
+        }
+
+        private void GetMicroPosts()
+        {
+            if (this.Id != 0)
+            {
+                DataTable dataTable = SqlConnectionGenerator.ExecuteStoreProcedure("sp_show_user_microposts",
+                    new string[] { "@User_Id" },
+                    new object[] { Id }
+                );
+
+                for (int row = 0; row < dataTable.Rows.Count; row++)
+                {
+                    MicroPosts.Add(new MicroPost
+                    (
+                        int.Parse(dataTable.Rows[row][2].ToString()),
+                        dataTable.Rows[row][3].ToString(),
+                        int.Parse(dataTable.Rows[row][0].ToString())
+                    ));
+                }
+            }
         }
 
         public bool Save()
@@ -136,8 +197,8 @@ namespace BlogBuster.Models
                         );
                 else
                     SqlConnectionGenerator.ExecuteStoreProcedure("sp_create_user",
-                    new string[] { "@Name", "@Email", "@Password", @"Gender" },
-                    new object[] { this.Name, this.Email, this.Password, this.Gender.ToString() }
+                    new string[] { "@Name", "@Email", "@Password", @"Gender", "@Type" },
+                    new object[] { this.Name, this.Email, this.Password, this.Gender.ToString(), this.Type.ToString() }
                     );
 
                 return true;
@@ -182,5 +243,11 @@ namespace BlogBuster.Models
     {
         Male,
         Female
+    }
+
+    public enum Type
+    {
+        Administrator,
+        Normal
     }
 }

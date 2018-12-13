@@ -22,6 +22,13 @@ namespace BlogBuster.Controllers
             {
                 Models.User user = Models.User.FindBy(collection["Email"].ToLower(), collection["Password"]);
                 Session["User_Id"] = user.Id;
+                Session["Type"] = user.Type.ToString();
+
+                if (Session["Type"].ToString() == "Administrator")
+                    SqlConnectionGenerator.ConnectionType = ConnectionType.Admin;
+                else
+                    SqlConnectionGenerator.ConnectionType = ConnectionType.Reader;
+
                 return RedirectToAction("Details", "User", user);
             }
             catch

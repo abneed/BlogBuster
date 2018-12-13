@@ -33,14 +33,6 @@
             </div>
         </div>
 
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
         <div class="form-group">
             @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -59,5 +51,5 @@
 
     <div>
         @*@Html.ActionLink("Back to List", "Index")*@
-        @Html.ActionLink("Back to profile", "Details")
+        @Html.ActionLink("Back to profile", "Details", new { id = Model.Id })
     </div>
