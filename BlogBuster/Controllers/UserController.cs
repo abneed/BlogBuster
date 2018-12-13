@@ -33,12 +33,13 @@ namespace BlogBuster.Controllers
             {
                 if (new Models.User(
                     collection["Name"],
-                    collection["Email"],
+                    collection["Email"].ToLower(),
                     collection["Password"],
                     collection["Gender"])
                     .Save())
                 {
-                    return RedirectToAction("Index");
+                    
+                    return RedirectToAction("Details", Models.User.FindBy(collection["Email"].ToLower(), collection["Password"]));
                 }
                 else
                 {
@@ -68,7 +69,7 @@ namespace BlogBuster.Controllers
                 if (new Models.User(
                     int.Parse(collection["Id"]),
                     collection["Name"],
-                    collection["Email"],
+                    collection["Email"].ToLower(),
                     collection["Password"],
                     collection["Gender"])
                     .Save())

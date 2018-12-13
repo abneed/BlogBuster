@@ -108,6 +108,22 @@ namespace BlogBuster.Models
                 );
         }
 
+        public static User FindBy(string Email, string Password)
+        {
+            DataTable dataTable = SqlConnectionGenerator.ExecuteStoreProcedure("sp_show_user_by_credentials",
+                new string[] { "@Email", "@Password" },
+                new object[] { Email, Password }
+                );
+
+            return new User(
+                int.Parse(dataTable.Rows[0][0].ToString()),
+                dataTable.Rows[0][1].ToString(),
+                dataTable.Rows[0][2].ToString(),
+                dataTable.Rows[0][3].ToString(),
+                dataTable.Rows[0][4].ToString()
+                );
+        }
+
         public bool Save()
         {
             try
@@ -122,7 +138,7 @@ namespace BlogBuster.Models
                     new string[] { "@Name", "@Email", "@Password", @"Gender" },
                     new object[] { this.Name, this.Email, this.Password, this.Gender.ToString() }
                     );
-                
+
                 return true;
             }
             catch (System.Exception)
