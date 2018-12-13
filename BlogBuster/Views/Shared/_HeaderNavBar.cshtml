@@ -72,16 +72,26 @@
 </style>
 <ul class="navbar">
     @Html.ActionLink("BlogBuster", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-    <li class="navbar-button">@Html.ActionLink("Sign Up", "Create", "User")</li>
-    <li class="navbar-button"><a href="#">Log In</a></li>
-    <li class="navbar-button dropdown">
-        <a class="dropbtn" href="#">Account</a>
-        <div class="dropdown-content">
-            <a href="#">Profile</a>
-            <a href="#">Settings</a>
-            <a href="#">Log Out</a>
-        </div>
-    </li>
-    <li class="navbar-button">@Html.ActionLink("Users", "Index", "User")</li>
+
+    @{
+        if (Session.Count > 0)
+        {
+            int id = int.Parse(Session["User_Id"].ToString());
+            <li class="navbar-button dropdown">
+                <a class="dropbtn" href="#">Account</a>
+                <div class="dropdown-content">
+                    @Html.ActionLink("Profile","Details", "User", new { Id = id} , null)
+                    @Html.ActionLink("Settings", "Edit", "User", new { Id = id }, null)
+                    @Html.ActionLink("Sign out", "Delete", "Session")
+                </div>
+            </li>
+        }
+        else
+        {
+            <li class="navbar-button">@Html.ActionLink("Sign up", "Create", "User")</li>
+            <li class="navbar-button">@Html.ActionLink("Sign in", "Create", "Session")</li>
+        }
+    }
+    @*<li class="navbar-button">@Html.ActionLink("Users", "Index", "User")</li>*@
     <li class="navbar-button">@Html.ActionLink("Home", "Index", "Home")</li>
 </ul>

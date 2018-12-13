@@ -38,8 +38,8 @@ namespace BlogBuster.Controllers
                     collection["Gender"])
                     .Save())
                 {
-                    
-                    return RedirectToAction("Details", Models.User.FindBy(collection["Email"].ToLower(), collection["Password"]));
+                    Session["User_Id"] = Models.User.FindBy(collection["Email"].ToLower(), collection["Password"]).Id;
+                    return RedirectToAction("Details", new { Id = int.Parse(Session["User_Id"].ToString()) });
                 }
                 else
                 {
@@ -74,7 +74,7 @@ namespace BlogBuster.Controllers
                     collection["Gender"])
                     .Save())
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Details", Models.User.Find(id));
                 }
                 else
                 {
@@ -95,7 +95,7 @@ namespace BlogBuster.Controllers
 
             ViewBag.Message = "User deleted";
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
 
     }

@@ -5,22 +5,24 @@
     Layout = "~/Views/Shared/_mainLayout.cshtml";
 }
 
-<h2>Details</h2>
-
+<h2>Profile</h2>
 <div>
-    <h4>User</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            <strong>
+                @Html.DisplayNameFor(model => model.Name)
+            </strong>
         </dt>
 
-        <dd>
+        <dd>    
             @Html.DisplayFor(model => model.Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Email)
+            <strong>
+                @Html.DisplayNameFor(model => model.Email)
+            </strong>
         </dt>
 
         <dd>
@@ -28,7 +30,9 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Password)
+            <strong>
+                @Html.DisplayNameFor(model => model.Password)
+            </strong>
         </dt>
 
         <dd>
@@ -36,7 +40,9 @@
         </dd>
         
         <dt>
-            @Html.DisplayNameFor(model => model.Gender)
+            <strong>
+                @Html.DisplayNameFor(model => model.Gender)
+            </strong>
         </dt>
 
         <dd>
@@ -45,6 +51,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Update profile", "Edit", new { id = Model.Id }) 
+    @*@Html.ActionLink("Back to List", "Index")*@
 </p>
