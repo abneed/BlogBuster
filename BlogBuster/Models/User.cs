@@ -10,6 +10,7 @@ namespace BlogBuster.Models
         [Required]
         public int Id { get; private set; }
 
+        [Display(Name = "Full name")]
         [Required]
         [StringLength(100)]
         public string Name { get; set; }
