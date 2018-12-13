@@ -34,7 +34,7 @@ namespace BlogBuster.Models
         public Type Type { get; set; }
 
         public List<MicroPost> MicroPosts { get; }
-
+        public List<Movie> Movies { get; set; }
 
         public User(string Name = null, string Email = null, string Password = null, string Gender = null, string Type = null)
         {
@@ -43,6 +43,7 @@ namespace BlogBuster.Models
             this.Password = Password;
             this.MicroPosts = new List<MicroPost>();
             this.GetMicroPosts();
+            this.GetMovies();
 
             switch (Gender)
             {
@@ -79,6 +80,7 @@ namespace BlogBuster.Models
             this.Password = Password;
             this.MicroPosts = new List<MicroPost>();
             this.GetMicroPosts();
+            this.GetMovies();
 
             switch (Gender)
             {
@@ -180,6 +182,28 @@ namespace BlogBuster.Models
                     (
                         int.Parse(dataTable.Rows[row][2].ToString()),
                         dataTable.Rows[row][3].ToString(),
+                        int.Parse(dataTable.Rows[row][0].ToString())
+                    ));
+                }
+            }
+        }
+
+        private void GetMovies()
+        {
+            if (this.Id != 0)
+            {
+                DataTable dataTable = SqlConnectionGenerator.ExecuteStoreProcedure("sp_show_user_movies",
+                    new string[] { "@User_Id" },
+                    new object[] { Id }
+                );
+
+                for (int row = 0; row < dataTable.Rows.Count; row++)
+                {
+                    Movies.Add(new Movie
+                    (
+                        int.Parse(dataTable.Rows[row][2].ToString()),
+                        dataTable.Rows[row][3].ToString(),
+                        dataTable.Rows[row][4].ToString(),
                         int.Parse(dataTable.Rows[row][0].ToString())
                     ));
                 }
