@@ -126,10 +126,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MicroPostController.cs" />
     <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Controllers\SessionController.cs" />
+    <Compile Include="Models\Book.cs" />
     <Compile Include="Models\MicroPost.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="SqlConnectionGenerator.cs" />
@@ -194,6 +196,9 @@
     <Content Include="Views\Movie\Index.cshtml" />
     <Content Include="Views\Movie\Create.cshtml" />
     <Content Include="Views\Movie\Edit.cshtml" />
+    <Content Include="Views\Book\Index.cshtml" />
+    <Content Include="Views\Book\Create.cshtml" />
+    <Content Include="Views\Book\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
