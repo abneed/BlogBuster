@@ -128,8 +128,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MicroPostController.cs" />
+    <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="Models\MicroPost.cs" />
+    <Compile Include="Models\Movie.cs" />
     <Compile Include="SqlConnectionGenerator.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -189,6 +191,9 @@
     <Content Include="Views\MicroPost\Index.cshtml" />
     <Content Include="Views\MicroPost\Create.cshtml" />
     <Content Include="Views\MicroPost\Edit.cshtml" />
+    <Content Include="Views\Movie\Index.cshtml" />
+    <Content Include="Views\Movie\Create.cshtml" />
+    <Content Include="Views\Movie\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

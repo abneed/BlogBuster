@@ -36,8 +36,6 @@ namespace BlogBuster.Models
             this.User_Id = User_Id;
         }
 
-
-
         public static Movie Find(int Id)
         {
             DataTable dataTable = SqlConnectionGenerator.ExecuteStoreProcedure("sp_show_movie",
@@ -59,7 +57,7 @@ namespace BlogBuster.Models
             {
                 if (ItExists())
                     SqlConnectionGenerator.ExecuteStoreProcedure("sp_update_movie",
-                        new string[] { "@Movie_Id", "@Title", "@Content" },
+                        new string[] { "@Movie_Id", "@Title", "@Description" },
                         new object[] { this.Id, this.Title, this.Description }
                         );
                 else

@@ -42,6 +42,7 @@ namespace BlogBuster.Models
             this.Email = Email;
             this.Password = Password;
             this.MicroPosts = new List<MicroPost>();
+            this.Movies = new List<Movie>();
             this.GetMicroPosts();
             this.GetMovies();
 
@@ -79,6 +80,7 @@ namespace BlogBuster.Models
             this.Email = Email;
             this.Password = Password;
             this.MicroPosts = new List<MicroPost>();
+            this.Movies = new List<Movie>();
             this.GetMicroPosts();
             this.GetMovies();
 
