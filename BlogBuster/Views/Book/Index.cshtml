@@ -1,14 +1,14 @@
-﻿@model IEnumerable<BlogBuster.Models.Movie>
+﻿@model IEnumerable<BlogBuster.Models.Book>
 
 @{
-    ViewBag.Title = "Favorites movies";
+    ViewBag.Title = "Favorites books";
     Layout = "~/Views/Shared/_mainLayout.cshtml";
 }
 
-<h2>Your favorites movies</h2>
+<h2>Your favorites books</h2>
 
 <p>
-    @Html.ActionLink("Add movie", "Create")
+    @Html.ActionLink("Add book", "Create")
 </p>
 <table class="table">
     <tr>

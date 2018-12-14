@@ -35,7 +35,7 @@ namespace BlogBuster.Models
 
         public List<MicroPost> MicroPosts { get; }
         public List<Movie> Movies { get; set; }
-
+        public List<Book> Books { get; set; }
         public User(string Name = null, string Email = null, string Password = null, string Gender = null, string Type = null)
         {
             this.Name = Name;
@@ -43,8 +43,11 @@ namespace BlogBuster.Models
             this.Password = Password;
             this.MicroPosts = new List<MicroPost>();
             this.Movies = new List<Movie>();
+            this.Books = new List<Book>();
+
             this.GetMicroPosts();
             this.GetMovies();
+            this.GetBooks();
 
             switch (Gender)
             {
@@ -81,8 +84,11 @@ namespace BlogBuster.Models
             this.Password = Password;
             this.MicroPosts = new List<MicroPost>();
             this.Movies = new List<Movie>();
+            this.Books = new List<Book>();
+
             this.GetMicroPosts();
             this.GetMovies();
+            this.GetBooks();
 
             switch (Gender)
             {
@@ -167,6 +173,28 @@ namespace BlogBuster.Models
                 dataTable.Rows[0][4].ToString(),
                 dataTable.Rows[0][5].ToString()
                 );
+        }
+
+        private void GetBooks()
+        {
+            if (this.Id != 0)
+            {
+                DataTable dataTable = SqlConnectionGenerator.ExecuteStoreProcedure("sp_show_user_books",
+                    new string[] { "@User_Id" },
+                    new object[] { Id }
+                );
+
+                for (int row = 0; row < dataTable.Rows.Count; row++)
+                {
+                    Books.Add(new Book
+                    (
+                        int.Parse(dataTable.Rows[row][2].ToString()),
+                        dataTable.Rows[row][3].ToString(),
+                        dataTable.Rows[row][4].ToString(),
+                        int.Parse(dataTable.Rows[row][0].ToString())
+                    ));
+                }
+            }
         }
 
         private void GetMicroPosts()
